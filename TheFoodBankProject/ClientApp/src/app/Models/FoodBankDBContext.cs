@@ -20,6 +20,7 @@ namespace TheFoodBankProject
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -73,6 +74,13 @@ namespace TheFoodBankProject
                 entity.Property(e => e.IngredientsId).HasColumnName("ingredientsId");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.UserId).HasColumnName("userId");
             });
 
             OnModelCreatingPartial(modelBuilder);
