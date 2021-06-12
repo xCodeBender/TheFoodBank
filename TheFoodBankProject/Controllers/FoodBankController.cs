@@ -30,6 +30,20 @@ namespace TheFoodBankProject.Controllers
             }
         }
 
+
+        // api/FoodBank/GetInventory
+        [HttpGet("GetInventory")]
+        public List<Inventory> GetInventory()
+        {
+            using (FoodBankDBContext context = new FoodBankDBContext())
+            {
+                return context.Inventories.ToList();
+            }
+                
+        }
+
+
+
         // api/FoodBank/AllIngredients
         [HttpGet("AllIngredients")]
         public List<Ingredient> GetAllIngredients()

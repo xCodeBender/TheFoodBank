@@ -1,1 +1,7 @@
-﻿<div style="border: 1px solid red">Login Component</div>
+<div style="border: 1px solid red">Login Component</div>
+<h1>Current User {{ myLogin }}</h1>
+
+<form #loginForm="ngForm" (ngSubmit)="setLogin(loginForm)">
+  <input type="text" name="user" ngModel />
+  <button>Login</button>
+</form>
