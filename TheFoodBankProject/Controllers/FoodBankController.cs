@@ -91,13 +91,15 @@ namespace TheFoodBankProject.Controllers
         {
             using (FoodBankDBContext context = new FoodBankDBContext())
             {
-                Ingredient ingredientName = new Ingredient()
-                {
-                    FoodName = foodName
-                };
-                context.Ingredients.Add(ingredientName);
-                context.SaveChanges();
-                return ingredientName;
+                //Ingredient ingredientName = new Ingredient()
+                //{
+                //    FoodName = foodName
+                //};
+                //context.Ingredients.Add(ingredientName);
+                //context.SaveChanges();
+                //return ingredientName;
+
+                return context.Ingredients.ToList().Find(b => b.FoodName == foodName);
             }
         }
 
@@ -107,13 +109,15 @@ namespace TheFoodBankProject.Controllers
         {
             using (FoodBankDBContext context = new FoodBankDBContext())
             {
-                Bank bank = new Bank()
-                {
-                    BankName = bankName
-                };
-                context.Banks.Add(bank);
-                context.SaveChanges();
-                return bank;
+                //Bank bank = new Bank()
+                //{
+                //    BankName = bankName
+                //};
+                //context.Banks.Add(bank);
+                //context.SaveChanges();
+                //return bank;
+
+                return context.Banks.ToList().Find(b => b.BankName == bankName);
             }
         }
 
