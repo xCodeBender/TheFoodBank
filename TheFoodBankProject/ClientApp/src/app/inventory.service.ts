@@ -3,6 +3,7 @@ import { Ingredient} from './ingredient'
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Inventory } from './inventory';
+import { Bank } from './Bank';
 
 @Injectable({ providedIn: 'root' })
 export class InventoryService {
@@ -16,6 +17,12 @@ export class InventoryService {
   testApi(): void {
     this.http.get("https://api.spoonacular.com/food/ingredients/search?query=baking mix&apiKey=ff94e67c9adc42c8a88c2308d88ce632&number=1").subscribe((response: any) => { console.log(response)});
   }
+
+  //autocomplete api call for ingredient
+  searchIngredientByName(foodName: string): any {
+    return this.http.get(`https://api.spoonacular.com/food/ingredients/search?query=${foodName} &apiKey=ff94e67c9adc42c8a88c2308d88ce632&=`).subscribe((response: any) => { console.log(response) });
+  }
+
 
 
   // login to the page
@@ -46,13 +53,19 @@ export class InventoryService {
   getInventory(): any {
     return this.http.get(this.inventoryUrl + "/GetInventory");
   }
-
+  //add to inventory
   addNewInventory(newInventory: Inventory): any {
     console.log(newInventory);
     const params = new HttpParams();
 
-    return this.http.post(this.inventoryUrl + "/AddToInventory" + "?bankId" + newInventory.BankId + "&ingredientId" + newInventory.IngredientsId + "&quantity" + newInventory.Quantity, params);
+    return this.http.post(this.inventoryUrl + "/AddToInventory" + "?bankId=" + newInventory.BankId + "&ingredientId=" + newInventory.IngredientsId + "&quantity=" + newInventory.Quantity, params);
   }
+
+  getIngredientByBank(bankId: number): any {
+    return this.http.get(this.inventoryUrl + "/GetIngredientsByBankId" + "?bankId=" + bankId);
+  }
+
+
 
   //searchFoodName(foodName: string): any {
     //return this.http.get(this.inventoryUrl + "/ingredientName" + )

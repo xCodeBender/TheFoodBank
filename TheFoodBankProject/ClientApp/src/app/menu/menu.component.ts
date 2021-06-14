@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { InventoryService } from '../inventory.service';
 import { Inventory } from '../inventory'
+import { Ingredient } from '../ingredient';
+import { Bank} from '../Bank'
 
 @Component({
     selector: 'app-menu',
@@ -11,7 +13,9 @@ import { Inventory } from '../inventory'
 export class MenuComponent {
   /** Menu ctor */
 
-  inventories:Inventory[]=[]
+  ingredient: Ingredient;
+  ingredients: Ingredient[] = [];
+  inventories: Inventory[] = [];
     constructor(private inventoryService:InventoryService) {}
 
   getMyInventory(): void {
@@ -19,5 +23,19 @@ export class MenuComponent {
   }
 
 
+  searchIngredients(foodName: string): any {
+    this.inventoryService.searchIngredientByName(foodName).subscribe((ingredient) => {
+      this.ingredient = ingredient;
+      console.log(this.ingredient);
+    });
+  }
+
+
+  searchIngredientByBankId(bankId: number): any {
+    this.inventoryService.getIngredientByBank(bankId).subscribe((b) => {
+      this.ingredients = b
+      console.log(this.ingredients)
+    });
+  }
 
 }
