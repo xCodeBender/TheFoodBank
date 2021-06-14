@@ -28,4 +28,8 @@ export class LoginComponent {
     this.router.navigate(['menu']);
   }
 
+
+
+
+  //talk to justin about login 
 }

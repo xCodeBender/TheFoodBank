@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Ingredient} from './ingredient'
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Inventory } from './inventory';
 
 @Injectable({ providedIn: 'root' })
 export class InventoryService {
@@ -45,4 +46,15 @@ export class InventoryService {
   getInventory(): any {
     return this.http.get(this.inventoryUrl + "/GetInventory");
   }
+
+  addNewInventory(newInventory: Inventory): any {
+    console.log(newInventory);
+    const params = new HttpParams();
+
+    return this.http.post(this.inventoryUrl + "/AddToInventory" + "?bankId" + newInventory.BankId + "&ingredientId" + newInventory.IngredientsId + "&quantity" + newInventory.Quantity, params);
+  }
+
+  //searchFoodName(foodName: string): any {
+    //return this.http.get(this.inventoryUrl + "/ingredientName" + )
+ // }
 }
