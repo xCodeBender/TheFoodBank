@@ -14,6 +14,8 @@ export class InventoryService {
 
   }
 
+  userCart: Ingredient[] = [];
+
   testApi(): void {
     this.http.get("https://api.spoonacular.com/food/ingredients/search?query=baking mix&apiKey=ff94e67c9adc42c8a88c2308d88ce632&number=1").subscribe((response: any) => { console.log(response)});
   }
@@ -25,6 +27,15 @@ export class InventoryService {
     return this.http.get(`https://api.spoonacular.com/food/ingredients/search?query=${foodName} &apiKey=ff94e67c9adc42c8a88c2308d88ce632&=`).subscribe((response: any) => { console.log(response) });
   }
 
+  bankId: number = 0;
+
+  setBankId(bId: number): void {
+    this.bankId = bId;
+  }
+
+  getBankId(): number {
+    return this.bankId;
+  }
 
 
   // login to the page
@@ -67,8 +78,14 @@ export class InventoryService {
     return this.http.get(this.inventoryUrl + "/GetIngredientsByBankId" + "?bankId=" + bankId);
   }
 
+  addToCart(ingredient: Ingredient): void {
+    this.userCart.push(ingredient);
+  }
 
-
+  deleteFromCart(ingredient: Ingredient): void {
+    let deleteTask = this.userCart.indexOf(ingredient);
+    this.userCart.splice(deleteTask, 1);
+  }
   //searchFoodName(foodName: string): any {
     //return this.http.get(this.inventoryUrl + "/ingredientName" + )
  // }

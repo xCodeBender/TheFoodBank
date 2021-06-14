@@ -37,16 +37,16 @@ namespace TheFoodBankProject.Controllers
             List<Ingredient> result = new List<Ingredient>();
             using (FoodBankDBContext context = new FoodBankDBContext())
             {
-                foreach(Inventory i in context.Inventories.ToList())
+                foreach (Inventory i in context.Inventories.ToList())
                 {
-                    if(i.BankId == bankId)
+                    if (i.BankId == bankId)
                     {
                         Ingredient ing = context.Ingredients.ToList().Find(ingred => ingred.Id == i.IngredientsId);
                         result.Add(ing);
                     }
                 }
             }
-                return result;
+            return result;
         }
 
 
@@ -58,7 +58,7 @@ namespace TheFoodBankProject.Controllers
             {
                 return context.Inventories.ToList();
             }
-                
+
         }
 
 
@@ -141,13 +141,13 @@ namespace TheFoodBankProject.Controllers
         }
 
         // api/FoodBank/DeleteFromCart
-        [HttpDelete("DeleteFromCart")]
-        public Inventory DeleteIngredientFromCart(int ingredientId, int quantity) // add correct parameters
+        [HttpDelete("DeleteFromInventory")]
+        public Inventory DeleteIngredientFromInventory(int ingredientId, int quantity)
         {
             using (FoodBankDBContext context = new FoodBankDBContext())
             {
                 Inventory remove = new Inventory();
-               remove =  context.Inventories.ToList().Find(f => f.IngredientsId == ingredientId && f.Quantity == quantity);
+                remove = context.Inventories.ToList().Find(f => f.IngredientsId == ingredientId && f.Quantity == quantity);
                 context.Remove(remove);
                 context.SaveChanges();
                 return remove;
@@ -173,7 +173,7 @@ namespace TheFoodBankProject.Controllers
 
         // api/FoodBank/DisplayCart
         [HttpGet("DisplayCart")]
-        public List<Ingredient> DisplayCart() 
+        public List<Ingredient> DisplayCart()
         {
             using (FoodBankDBContext context = new FoodBankDBContext())
             {
@@ -187,7 +187,7 @@ namespace TheFoodBankProject.Controllers
 
         public Inventory AddToInventory(int bankId, int ingredientsId, int quantity)
         {
-            using(FoodBankDBContext context = new FoodBankDBContext())
+            using (FoodBankDBContext context = new FoodBankDBContext())
             {
                 Inventory adder = new Inventory()
                 {

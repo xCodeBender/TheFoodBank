@@ -1,1 +1,22 @@
-﻿<div style="border: 1px solid red">Menu Component</div>
+<div style="border: 1px solid red">Menu Component</div>
+<!--<div *ngFor="let i of inventories" >
+   
+      <p> Bank Number  {{i.bankId}} </p>,
+      <p> Quantity {{i.quantity}} </p>
+     
+</div>-->
+
+<form #searchForm="ngForm" (ngSubmit) ="searchBank(searchForm)">
+  <input name="search" id="search" ngModel />
+  <button>Search</button>
+</form>
+
+<div *ngFor="let i of ingredients">
+
+    {{i.foodName}}
+  <img src="https://spoonacular.com/cdn/ingredients_100x100/{{i.foodImages}}"/>
+  <button (click)="addToCart(i)">Add to Cart</button>
+  <form>
+    <input type="number" name="quantity" />
+  </form>
+</div>

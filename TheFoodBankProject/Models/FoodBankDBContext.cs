@@ -80,7 +80,9 @@ namespace TheFoodBankProject
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.UserId).HasColumnName("userId");
+                entity.Property(e => e.LoginId)
+                    .HasMaxLength(250)
+                    .HasColumnName("loginId");
             });
 
             OnModelCreatingPartial(modelBuilder);

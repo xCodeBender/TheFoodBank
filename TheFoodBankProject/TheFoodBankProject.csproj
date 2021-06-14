@@ -37,14 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Models\Bank.cs" />
-    <None Include="Models\FoodBankDBContext.cs" />
-    <None Include="Models\Ingredient.cs" />
-    <None Include="Models\Inventory.cs" />
-    <None Include="Models\User.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\Bank.ts" />
   </ItemGroup>
 
