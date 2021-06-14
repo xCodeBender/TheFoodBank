@@ -18,6 +18,7 @@ export class InventoryService {
     this.http.get("https://api.spoonacular.com/food/ingredients/search?query=baking mix&apiKey=ff94e67c9adc42c8a88c2308d88ce632&number=1").subscribe((response: any) => { console.log(response)});
   }
 
+  //testing branch
 
   //autocomplete api call for ingredient
   searchIngredientByName(foodName: string): any {
