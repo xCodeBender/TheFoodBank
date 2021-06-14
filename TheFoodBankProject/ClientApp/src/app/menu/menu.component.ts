@@ -18,6 +18,6 @@ export class MenuComponent {
     this.inventoryService.getInventory().subscribe(inventories => this.inventories = inventories)
   }
 
-
+  
 
 }

@@ -30,6 +30,25 @@ namespace TheFoodBankProject.Controllers
             }
         }
 
+        //gets ingredients using the bank id
+        [HttpGet("GetIngredientsByBankId")]
+        public List<Ingredient> GetIngredientsByBankId(int bankId)
+        {
+            List<Ingredient> result = new List<Ingredient>();
+            using (FoodBankDBContext context = new FoodBankDBContext())
+            {
+                foreach(Inventory i in context.Inventories.ToList())
+                {
+                    if(i.BankId == bankId)
+                    {
+                        Ingredient ing = context.Ingredients.ToList().Find(ingred => ingred.Id == i.IngredientsId);
+                        result.Add(ing);
+                    }
+                }
+            }
+                return result;
+        }
+
 
         // api/FoodBank/GetInventory
         [HttpGet("GetInventory")]
