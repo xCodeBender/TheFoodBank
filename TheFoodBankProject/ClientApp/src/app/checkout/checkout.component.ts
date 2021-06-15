@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ingredient } from '../ingredient';
+import { Inventory } from '../inventory';
 import { InventoryService } from '../inventory.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class CheckoutComponent {
 
   ngOnInit(): void { }
 
-
+  inventories: Inventory[] = [];
 
   constructor(private inventoryService: InventoryService, public router: Router ) { }
   
@@ -38,7 +39,16 @@ export class CheckoutComponent {
   }
 
 
-  subtractQuantity()
+  subtractQuantity(): void {
+    this.getCartDistinct().forEach((i: Ingredient) => {
+      let count: number = this.getCount(i);
+      this.inventoryService.reduceQuantity(this.inventoryService.bankId, i.id, count).subscribe(response => console.log(response));
+      console.log("count" + count);
+      console.log("bankId" + this.inventoryService.getBankId());
+      console.log("id" + i.id);
+    })
+    
+  }
 
 
 

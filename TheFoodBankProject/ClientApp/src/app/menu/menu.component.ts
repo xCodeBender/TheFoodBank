@@ -15,6 +15,7 @@ export class MenuComponent {
   /** Menu ctor */
 
   ngOnInit(): void {
+    /*this.inventoryService.setBankId(2);*/
     this.searchIngredientByBankId(2);
   }
 
@@ -34,6 +35,7 @@ export class MenuComponent {
     this.inventoryService.getIngredientByBank(bankId).subscribe((b) => {
       this.ingredients = b
       console.log(this.ingredients)
+      this.inventoryService.setBankId(bankId);
     });
   }
 

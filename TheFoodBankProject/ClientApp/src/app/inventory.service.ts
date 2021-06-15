@@ -89,6 +89,12 @@ export class InventoryService {
   }
 
 
+  reduceQuantity(bankId:number, ingredientId:number, quantity:number): any {
+    const params = new HttpParams();
+    return this.http.put(this.inventoryUrl + "/SubtractQuantity" + "?bankId=" + bankId + "&ingredientId=" + ingredientId + "&quantity=" + quantity, params);
+  }
+
+
   deleteFromCart(ingredient: Ingredient): void {
     let deleteTask = this.userCart.indexOf(ingredient);
     this.userCart.splice(deleteTask, 1);
