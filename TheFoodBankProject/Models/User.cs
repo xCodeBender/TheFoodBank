@@ -8,6 +8,6 @@ namespace TheFoodBankProject
     public partial class User
     {
         public int Id { get; set; }
-        public int? UserId { get; set; }
+        public string LoginId { get; set; }
     }
 }

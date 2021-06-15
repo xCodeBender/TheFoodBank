@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'oidc-client';
 import { InventoryService } from '../inventory.service';
 
 @Component({
@@ -9,11 +11,12 @@ import { InventoryService } from '../inventory.service';
 })
 /** Login component*/
 export class LoginComponent {
-    router: any;
     /** Login ctor */
-    constructor(private inventoryService:InventoryService) {
+  constructor(private inventoryService: InventoryService, public router: Router) {
 
   }
+
+  @Output() createdLogin = new EventEmitter<User>();
 
   myLogin: string = "";
 
@@ -25,11 +28,10 @@ export class LoginComponent {
   setLogin(form: NgForm): void {
     this.inventoryService.setLogin(form.form.value.user);
     this.getLogin();
-    this.router.navigate(['menu']);
+    this.router.navigate(['Menu']);
   }
 
 
 
 
-  //talk to justin about login 
 }
