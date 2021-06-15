@@ -1,4 +1,7 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Ingredient } from '../ingredient';
+import { InventoryService } from '../inventory.service';
 
 @Component({
     selector: 'app-checkout',
@@ -7,8 +10,38 @@
 })
 /** Checkout component*/
 export class CheckoutComponent {
-    /** Checkout ctor */
-    constructor() {
+  /** Checkout ctor */
 
-    }
+  ngOnInit(): void { }
+
+
+
+  constructor(private inventoryService: InventoryService, public router: Router ) { }
+  
+  getCart(): any {
+    return this.inventoryService.getCart();
+  }
+
+ 
+  getCartDistinct(): any {
+    return this.inventoryService.getCart().filter((x, i, a) => a.indexOf(x) == i);
+  }
+
+
+  getCount(i: Ingredient): number {
+    let result = this.inventoryService.getCart().filter((item) => {
+      return item.id == i.id
+    });
+    console.log(result);
+    console.log(i.id);
+    return result.length;
+  }
+
+
+  subtractQuantity()
+
+
+
+
 }
+

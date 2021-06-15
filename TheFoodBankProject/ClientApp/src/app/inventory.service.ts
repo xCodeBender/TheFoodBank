@@ -80,11 +80,19 @@ export class InventoryService {
 
   addToCart(ingredient: Ingredient): void {
     this.userCart.push(ingredient);
+    console.log(this.userCart)
   }
+
+
+  getCart(): any {
+    return this.userCart;
+  }
+
 
   deleteFromCart(ingredient: Ingredient): void {
     let deleteTask = this.userCart.indexOf(ingredient);
     this.userCart.splice(deleteTask, 1);
+    console.log(this.userCart)
   }
   //searchFoodName(foodName: string): any {
     //return this.http.get(this.inventoryUrl + "/ingredientName" + )

@@ -16,6 +16,7 @@
     {{i.foodName}}
   <img src="https://spoonacular.com/cdn/ingredients_100x100/{{i.foodImages}}"/>
   <button (click)="addToCart(i)">Add to Cart</button>
+  <button (click)="deleteFromCart(i)">Remove From Cart</button>
   <form>
     <input type="number" name="quantity" />
   </form>

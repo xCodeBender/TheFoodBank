@@ -1,1 +1,6 @@
-<div style="border: 1px solid red">Checkout Component</div>
+
+<div *ngFor="let i of getCartDistinct()">
+  <p>{{ i.foodName }}</p>
+  <img src="https://spoonacular.com/cdn/ingredients_100x100/{{i.foodImages}}" />
+  <p>Count: {{ getCount(i) }}</p>
+</div>

@@ -201,5 +201,24 @@ namespace TheFoodBankProject.Controllers
                 return adder;
             }
         }
+
+
+        [HttpPut("SubtractQuantity")]
+
+        public Inventory SubtractQuantity(int ingredientId, int quantity,int bankId)
+        {
+            using (FoodBankDBContext context = new FoodBankDBContext())
+            {
+                var existingInventory = context.Inventories.Where(i => i.BankId == bankId && i.IngredientsId == ingredientId).FirstOrDefault<Inventory>();
+                if(existingInventory != null)
+                {
+                    existingInventory.Quantity = existingInventory.Quantity - quantity;
+                    context.SaveChanges();
+                }
+                return existingInventory;
+            }
+
+            
+        }
     }
 }

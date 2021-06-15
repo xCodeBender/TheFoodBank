@@ -22,7 +22,7 @@ export class MenuComponent {
   ingredients: Ingredient[] = [];
   ingredient: Ingredient;
 
-  userCart: Ingredient[] = [];
+ /* userCart: Ingredient[] = [];*/
 
   constructor(private inventoryService: InventoryService, public router: Router ) {}
 
@@ -48,12 +48,15 @@ export class MenuComponent {
   addToCart(addIngredient: Ingredient) {
    /* let addItem: Ingredient[] = [];*/
 
-    this.userCart.push(addIngredient);
-    /*this.inventoryService.addToCart(addIngredient);*/
-    console.log(this.userCart);
+    //this.userCart.push(addIngredient);
+    this.inventoryService.addToCart(addIngredient);
+    //console.log(this.userCart);
   }
 
   deleteFromCart(deleteIngredient: Ingredient) {
+    //let deleteItem = this.userCart.indexOf(deleteIngredient);
+   // this.userCart.splice(deleteItem, 1);
+   // console.log(this.userCart);
     this.inventoryService.deleteFromCart(deleteIngredient);
   }
 
