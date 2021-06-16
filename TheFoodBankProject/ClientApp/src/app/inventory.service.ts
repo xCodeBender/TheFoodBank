@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Inventory } from './inventory';
 import { Bank } from './Bank';
+import { User } from 'oidc-client';
 
 @Injectable({ providedIn: 'root' })
 export class InventoryService {
@@ -24,7 +25,7 @@ export class InventoryService {
 
   //autocomplete api call for ingredient
   searchIngredientByName(foodName: string): any {
-    return this.http.get(`https://api.spoonacular.com/food/ingredients/search?query=${foodName} &apiKey=ff94e67c9adc42c8a88c2308d88ce632&=`).subscribe((response: any) => { console.log(response) });
+    return this.http.get(`https://api.spoonacular.com/food/ingredients/search?query=${foodName} &apiKey=ff94e67c9adc42c8a88c2308d88ce632&=`);
   }
 
   bankId: number = 0;
@@ -49,12 +50,30 @@ export class InventoryService {
     return this.loginName;
   }
 
+  createNewUser(newUsers: string): any {
+    console.log(newUsers);
+    const params = new HttpParams();
+
+    return this.http.post(this.inventoryUrl + "/AddUser" + "?loginId=" + newUsers, params);
+  }
+
   //adding new ingredient to ingredient list
   addNewIngredient(newIngredient: Ingredient): any {
     console.log(newIngredient);
     const params = new HttpParams();
 
     return this.http.post(this.inventoryUrl + "/AddFood" + "?foodName=" + newIngredient.foodName + "&apiId=" + newIngredient.apiId + "&foodImages=" + newIngredient.foodImages, params);
+  }
+
+  //single ingredient
+  oneIngredient(oneIngredient: string): any {
+    return this.http.get(this.inventoryUrl + "/ingredientName?foodName=" + oneIngredient);
+  }
+
+  //donating ingredients
+
+  checkIngredient(check: string): any {
+   return this.http.get(this.inventoryUrl + "/CheckIngredient?foodName=" + check);
   }
 
   //return all ingredients
@@ -71,7 +90,7 @@ export class InventoryService {
     console.log(newInventory);
     const params = new HttpParams();
 
-    return this.http.post(this.inventoryUrl + "/AddToInventory" + "?bankId=" + newInventory.BankId + "&ingredientId=" + newInventory.IngredientsId + "&quantity=" + newInventory.Quantity, params);
+    return this.http.post(this.inventoryUrl + "/AddToInventory" + "?bankId=" + newInventory.BankId + "&ingredientsId=" + newInventory.IngredientsId + "&quantity=" + newInventory.Quantity, params);
   }
 
   getIngredientByBank(bankId: number): any {
@@ -88,6 +107,9 @@ export class InventoryService {
     return this.userCart;
   }
 
+  clearCart(): void {
+    this.userCart = [];
+  }
 
   reduceQuantity(bankId:number, ingredientId:number, quantity:number): any {
     const params = new HttpParams();

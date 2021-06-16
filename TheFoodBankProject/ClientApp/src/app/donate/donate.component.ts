@@ -19,24 +19,83 @@ export class DonateComponent {
 
 
   ngOnInit(): void {
-    this.getMyIngredients();
+   /* this.getMyIngredients();*/
   }
 
+  public showMyMessage = false
 
+  showMessageSoon() {
+    setTimeout(() => {
+      this.showMyMessage = true
+    }, 800)
+  }
   getMyIngredients(): void {
     this.inventoryService.getIngredients().subscribe(ingredients => this.ingredients = ingredients)
   }
 
   addIngredient(form: NgForm): void {
-    let response = this.searchIngredients(form.form.value.searchTerm);
-    let newIngredient: Ingredient = {
-      foodName: form.form.value.foodName,
-      apiId:response.results[0].id, //this needs to come from the foodAPI
-      foodImages: response.results[0].image,//this needs to come from the foodAPI
-      id:0
-    }
+    let search = form.form.value.searchTerm;
+   /* let response = this.searchIngredients(search);*/
+    this.inventoryService.checkIngredient(search).subscribe(
+      (check: boolean) => {
+        console.log(check);
+        if (check == true) {
+          /* this exists in database add to bank inventory*/
+            this.inventoryService.oneIngredient(search).subscribe((oneItem: any) => {
+              console.log(oneItem);
+              let newInventory: Inventory = {
+                BankId: form.form.value.bankId,
+                IngredientsId: oneItem.id,
+                Quantity: form.form.value.quantity,
+                id: 0
+              }
+              this.inventoryService.addNewInventory(newInventory).subscribe(n => {
+                console.log(n);
+              });
+            })
+          
+        }
+        else
+        {
+          /* this does not exists in database  create ingredient, add to ingredientDB, then add to bank name */
+          this.inventoryService.searchIngredientByName(search).subscribe(response => {
+            let newIngredient: Ingredient = {
+            foodName: search,
+            apiId:response.results[0].id, //this needs to come from the foodAPI
+            foodImages: response.results[0].image,//this needs to come from the foodAPI
+            id:0
+          }
 
-    this.inventoryService.addNewIngredient(newIngredient);
+            this.inventoryService.addNewIngredient(newIngredient).subscribe(r => {
+              this.inventoryService.oneIngredient(search).subscribe((oneItem: any) => {
+                console.log(oneItem);
+                let newInventory: Inventory = {
+                  BankId: form.form.value.bankId,
+                  IngredientsId: oneItem.id,
+                  Quantity: form.form.value.quantity,
+                  id: 0
+                }
+                this.inventoryService.addNewInventory(newInventory).subscribe(n => {
+                  console.log(n);
+                });
+              })
+            });
+            /* making new inventory*/
+            
+
+            
+          })
+        }
+      }
+    );
+  //  let newIngredient: Ingredient = {
+  //    foodName: form.form.value.foodName,
+  //    apiId:response.results[0].id, //this needs to come from the foodAPI
+  //    foodImages: response.results[0].image,//this needs to come from the foodAPI
+  //    id:0
+  //  }
+
+  //  /*this.inventoryService.addNewIngredient(newIngredient);*/
   }
 
   addInventory(form: NgForm): void {

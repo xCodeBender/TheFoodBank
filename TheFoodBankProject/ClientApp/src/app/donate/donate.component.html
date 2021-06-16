@@ -1,6 +1,12 @@
-<div *ngFor="let i of ingredients">
-  <p>{{i.foodName}}</p>
-</div>
+
+<form #checkIngredients="ngForm"(ngSubmit)="addIngredient(checkIngredients)">
+  <input name="searchTerm" placeholder="Search Food Name" ngModel/>
+  <input name="bankId" type="number" placeholder="Select Bank #" ngModel />
+  <input name="quantity" type="number" placeholder="Quantity" ngModel />
+  <button (click)="showMessageSoon()">Submit</button>
+          <h1 *ngIf="showMyMessage">Thank you for your donation</h1>
+</form>
+
 
 
 

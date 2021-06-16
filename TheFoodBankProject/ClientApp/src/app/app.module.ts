@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { DonateComponent } from './donate/donate.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { HeaderComponent } from '../header/header.component';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
     LoginComponent,
     MenuComponent,
     DonateComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    HeaderComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,12 +36,14 @@ import { CheckoutComponent } from './checkout/checkout.component';
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent, pathMatch: 'full' },
+      { path: 'header', component: HeaderComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'Login', component: LoginComponent },
       { path: 'Menu', component: MenuComponent },
       { path: 'Donate', component: DonateComponent },
       { path: 'Checkout', component: CheckoutComponent },
+      { path: 'Confirmation', component: ConfirmationComponent }
 
     ])
   ],

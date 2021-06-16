@@ -17,7 +17,11 @@ export class CheckoutComponent {
 
   inventories: Inventory[] = [];
 
-  constructor(private inventoryService: InventoryService, public router: Router ) { }
+  constructor(private inventoryService: InventoryService, public router: Router) { }
+
+  getLogin(): string {
+    return this.inventoryService.getLogin();
+  }
   
   getCart(): any {
     return this.inventoryService.getCart();
@@ -46,8 +50,10 @@ export class CheckoutComponent {
       console.log("count" + count);
       console.log("bankId" + this.inventoryService.getBankId());
       console.log("id" + i.id);
+      
     })
-    
+    this.router.navigate(['Confirmation']);
+
   }
 
 
