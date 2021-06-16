@@ -1,10 +1,13 @@
+<h3>{{ getLogin() }}'s Cart</h3>
 
-<div *ngFor="let i of getCartDistinct()">
+<div class="item-container">
+<div class="item card" *ngFor="let i of getCartDistinct()">
   <p>{{ i.foodName }}</p>
-  <img src="https://spoonacular.com/cdn/ingredients_100x100/{{i.foodImages}}" />
+  <img class="item-picture" src="https://spoonacular.com/cdn/ingredients_100x100/{{i.foodImages}}" />
   <p>Count: {{ getCount(i) }}</p>
 </div>
 
+  </div>
 <div>
   <button (click)="subtractQuantity()">Submit</button>
 </div>

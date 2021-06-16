@@ -14,3 +14,23 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+.item-container {
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.item{
+    text-align:center;
+    margin: 5px;
+    display:flex;
+    flex-direction: column;
+}
+.item-picture{
+    height:100px;
+    width:100px;
+}
+
+body{
+    background-color:lightblue;
+}

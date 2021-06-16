@@ -1,9 +1,8 @@
 
-<h3>Current User {{ myLogin }}</h3>
 <h1>Welcome to the food bank!</h1>
 
 
 <form ngNativeValidate #loginForm="ngForm" (ngSubmit)="setLogin(loginForm)">
-  <input type="text" name="user" required ngModel />
+  <input type="text" name="user" placeholder="Enter your Name" required ngModel />
   <button>Login</button>
 </form>

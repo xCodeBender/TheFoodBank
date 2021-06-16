@@ -1,0 +1,10 @@
+<h1>This is your order!</h1>
+
+
+<div *ngFor="let i of clear">
+  <p>{{ i.foodName }}</p>
+  <img src="https://spoonacular.com/cdn/ingredients_100x100/{{i.foodImages}}" />
+  <p>Count: {{ getCount(i) }}</p>
+  
+</div>
+<a routerLink="/Login">Click to Create another order</a>

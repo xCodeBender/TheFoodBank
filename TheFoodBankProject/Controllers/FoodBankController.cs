@@ -30,6 +30,26 @@ namespace TheFoodBankProject.Controllers
             }
         }
 
+        [HttpGet("CheckIngredient")]
+        public bool CheckIngredient(string foodName)
+        {
+            using (FoodBankDBContext context = new FoodBankDBContext())
+            {
+                Ingredient result = context.Ingredients.ToList().Find(item => item.FoodName.ToLower().Trim() == foodName.ToLower().Trim());
+                if (result == null)
+                {
+                    return false;
+                } 
+                else
+                {
+                    return true;
+                }
+            }
+
+            
+        }
+
+
         //gets ingredients using the bank id
         [HttpGet("GetIngredientsByBankId")]
         public List<Ingredient> GetIngredientsByBankId(int bankId)
@@ -48,6 +68,23 @@ namespace TheFoodBankProject.Controllers
             }
             return result;
         }
+
+        [HttpPost("AddUser")]
+
+        public User AddUser(string loginId)
+        {
+            using(FoodBankDBContext context = new FoodBankDBContext())
+            {
+                User newUser = new User()
+                {
+                    LoginId = loginId
+                };
+                context.Users.Add(newUser);
+                context.SaveChanges();
+                return newUser;
+            }
+        }
+
 
 
         // api/FoodBank/GetInventory
@@ -118,7 +155,7 @@ namespace TheFoodBankProject.Controllers
                 //context.SaveChanges();
                 //return ingredientName;
 
-                return context.Ingredients.ToList().Find(b => b.FoodName == foodName);
+                return context.Ingredients.ToList().Find(b => b.FoodName.ToLower().Trim() == foodName.ToLower().Trim());
             }
         }
 
@@ -156,12 +193,14 @@ namespace TheFoodBankProject.Controllers
         }
 
         // api/FoodBank/DeleteQuantity
-        [HttpDelete("DeleteQuantity")] // do we use HTTP DELETE or POST?
+        [HttpDelete("DeleteQuantity")] 
 
         public Inventory DeleteFromQuantity(int ingredientId, int quantity)
         {
             using (FoodBankDBContext context = new FoodBankDBContext())
             {
+                
+
                 Inventory remove = new Inventory();
                 remove = context.Inventories.ToList().Find(f => f.IngredientsId == ingredientId && f.Quantity == quantity);
                 context.Remove(remove);
@@ -189,16 +228,26 @@ namespace TheFoodBankProject.Controllers
         {
             using (FoodBankDBContext context = new FoodBankDBContext())
             {
-                Inventory adder = new Inventory()
+               Inventory existingInventory = context.Inventories.ToList().Find(q => q.BankId == bankId && q.IngredientsId == ingredientsId);
+               if(existingInventory == null)
                 {
-                    BankId = bankId,
-                    IngredientsId = ingredientsId,
-                    Quantity = quantity
-                };
+                    Inventory adder = new Inventory()
+                    {
+                        BankId = bankId,
+                        IngredientsId = ingredientsId,
+                        Quantity = quantity
+                    };
 
-                context.Inventories.Add(adder);
-                context.SaveChanges();
-                return adder;
+                    context.Inventories.Add(adder);
+                    context.SaveChanges();
+                    return adder;
+                }
+                else
+                {
+                    existingInventory.Quantity += quantity;
+                    context.SaveChanges();
+                }
+                return existingInventory;
             }
         }
 
@@ -214,6 +263,15 @@ namespace TheFoodBankProject.Controllers
                 {
                     existingInventory.Quantity = existingInventory.Quantity - quantity;
                     context.SaveChanges();
+                    if(existingInventory.Quantity <= 0)
+                    {
+                        context.Inventories.Remove(existingInventory);
+                        context.SaveChanges();
+                    }
+                    //if quantity <= 0
+                    //remove existing from db
+                    //context.inventories.remove(existing)
+                    //save
                 }
                 return existingInventory;
             }

@@ -37,6 +37,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\confirmation\confirmation.component.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\confirmation\confirmation.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\header\header.component.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\header\header.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\Bank.ts" />
   </ItemGroup>
 

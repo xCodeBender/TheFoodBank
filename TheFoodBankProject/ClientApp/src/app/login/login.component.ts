@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'oidc-client';
 import { InventoryService } from '../inventory.service';
+
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
 
   }
 
-  @Output() createdLogin = new EventEmitter<User>();
+ /* @Output() createdLogin = new EventEmitter<User>();*/
 
   myLogin: string = "";
 
@@ -28,10 +29,11 @@ export class LoginComponent {
   setLogin(form: NgForm): void {
     this.inventoryService.setLogin(form.form.value.user);
     this.getLogin();
+    this.inventoryService.createNewUser(this.myLogin).subscribe(r => console.log(r));
     this.router.navigate(['Menu']);
   }
 
-
+  
 
 
 }
