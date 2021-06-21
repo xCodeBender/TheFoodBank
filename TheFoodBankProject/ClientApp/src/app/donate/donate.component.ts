@@ -29,6 +29,7 @@ export class DonateComponent {
       this.showMyMessage = true
     }, 800)
   }
+
   getMyIngredients(): void {
     this.inventoryService.getIngredients().subscribe(ingredients => this.ingredients = ingredients)
   }
