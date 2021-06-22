@@ -15,6 +15,7 @@ import { DonateComponent } from './donate/donate.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HeaderComponent } from '../header/header.component';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
     DonateComponent,
     CheckoutComponent,
     HeaderComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -43,7 +45,8 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
       { path: 'Menu', component: MenuComponent },
       { path: 'Donate', component: DonateComponent },
       { path: 'Checkout', component: CheckoutComponent },
-      { path: 'Confirmation', component: ConfirmationComponent }
+      { path: 'Confirmation', component: ConfirmationComponent },
+      { path: 'footer', component: FooterComponent }
 
     ])
   ],

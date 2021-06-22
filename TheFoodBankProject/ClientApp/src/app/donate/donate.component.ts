@@ -47,9 +47,9 @@ export class DonateComponent {
             this.inventoryService.oneIngredient(search).subscribe((oneItem: any) => {
               console.log(oneItem);
               let newInventory: Inventory = {
-                BankId: form.form.value.bankId,
-                IngredientsId: oneItem.id,
-                Quantity: form.form.value.quantity,
+                bankId: form.form.value.bankId,
+                ingredientsId: oneItem.id,
+                quantity: form.form.value.quantity,
                 id: 0
               }
               this.inventoryService.addNewInventory(newInventory).subscribe(n => {
@@ -73,9 +73,9 @@ export class DonateComponent {
               this.inventoryService.oneIngredient(search).subscribe((oneItem: any) => {
                 console.log(oneItem);
                 let newInventory: Inventory = {
-                  BankId: form.form.value.bankId,
-                  IngredientsId: oneItem.id,
-                  Quantity: form.form.value.quantity,
+                  bankId: form.form.value.bankId,
+                  ingredientsId: oneItem.id,
+                  quantity: form.form.value.quantity,
                   id: 0
                 }
                 this.inventoryService.addNewInventory(newInventory).subscribe(n => {
@@ -104,9 +104,9 @@ export class DonateComponent {
   addInventory(form: NgForm): void {
     
     let newInventory: Inventory = {
-      BankId: 0,//we want this to be current bankID from page
-      IngredientsId: 0,//how to add items to inventory when using the api for igredients and also inventory only uses numeric values to store
-      Quantity: form.form.value.quantity,
+      bankId: 0,//we want this to be current bankID from page
+      ingredientsId: 0,//how to add items to inventory when using the api for igredients and also inventory only uses numeric values to store
+      quantity: form.form.value.quantity,
       id: 0
     }
     this.inventoryService.addNewInventory(newInventory);

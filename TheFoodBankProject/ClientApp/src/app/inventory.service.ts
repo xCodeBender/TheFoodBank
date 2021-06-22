@@ -96,13 +96,15 @@ export class InventoryService {
 
   }
 
+   
+
 
   //add to inventory
   addNewInventory(newInventory: Inventory): any {
     console.log(newInventory);
     const params = new HttpParams();
 
-    return this.http.post(this.inventoryUrl + "api/FoodBank/AddToInventory" + "?bankId=" + newInventory.BankId + "&ingredientsId=" + newInventory.IngredientsId + "&quantity=" + newInventory.Quantity, params);
+    return this.http.post(this.inventoryUrl + "api/FoodBank/AddToInventory" + "?bankId=" + newInventory.bankId + "&ingredientsId=" + newInventory.ingredientsId + "&quantity=" + newInventory.quantity, params);
   }
 
   getIngredientByBank(bankId: number): any {

@@ -1,6 +1,6 @@
 export interface Inventory {
   id: number;
-  BankId: number;
-  IngredientsId: number;
+  bankId: number;
+  ingredientsId: number;
   quantity: number;
 }

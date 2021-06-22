@@ -23,7 +23,6 @@ export class MenuComponent {
 
   inventories: Inventory[] = [];
   ingredients: Ingredient[] = [];
-  ingredient: Ingredient;
   bankId: number = 2;
 
  /* userCart: Ingredient[] = [];*/
@@ -68,26 +67,40 @@ export class MenuComponent {
 
   deleteFromCart(deleteIngredient: Ingredient) {
     //let deleteItem = this.userCart.indexOf(deleteIngredient);
-   // this.userCart.splice(deleteItem, 1);
-   // console.log(this.userCart);
-    this.inventoryService.deleteFromCart(deleteIngredient);
-    this.raiseQuantity(deleteIngredient);
+    // this.userCart.splice(deleteItem, 1);
+    if (this.getCount(deleteIngredient) > 0) {
+      this.inventoryService.deleteFromCart(deleteIngredient);
+      /*this.inventoryService.getCart().filter(i => i.id == deleteIngredient.id );*/
+      this.raiseQuantity(deleteIngredient);
+    }
+   
+  }
+
+  getCount(i: Ingredient): number {
+    let result = this.inventoryService.getCart().filter((item) => {
+      return item.id == i.id
+    });
+    console.log(result);
+    console.log(i.id);
+    return result.length;
   }
 
   getIngredientQuantity(ingredient: Ingredient): number  {
     console.log(this.inventories);
     console.log(ingredient);
     console.log(this.bankId);
-    return this.inventories.find(i => i.BankId == this.bankId && i.IngredientsId == ingredient.id).quantity;
+    let find: Inventory = this.inventories.filter(i => i.bankId == this.bankId && i.ingredientsId == ingredient.id)[0];
+    console.log(find);
+    return find.quantity;
   }
 
   lowerQuantity(ingredient: Ingredient): void {
     console.log(this.inventories);
-    this.inventories.find(i => i.BankId == this.bankId && i.IngredientsId == ingredient.id).quantity -= 1;
+    this.inventories.filter(i => i.bankId == this.bankId && i.ingredientsId == ingredient.id)[0].quantity -= 1;
   }
 
   raiseQuantity(ingredient: Ingredient): void {
-    this.inventories.find(i => i.BankId == this.bankId && i.IngredientsId == ingredient.id).quantity += 1;
+    this.inventories.filter(i => i.bankId == this.bankId && i.ingredientsId == ingredient.id)[0].quantity += 1;
   }
 
 

@@ -40,6 +40,8 @@
   <ItemGroup>
     <TypeScriptCompile Remove="ClientApp\src\confirmation\confirmation.component.spec.ts" />
     <TypeScriptCompile Remove="ClientApp\src\confirmation\confirmation.component.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\footer\footer.component.spec.ts" />
+    <TypeScriptCompile Remove="ClientApp\src\footer\footer.component.ts" />
     <TypeScriptCompile Remove="ClientApp\src\header\header.component.spec.ts" />
     <TypeScriptCompile Remove="ClientApp\src\header\header.component.ts" />
   </ItemGroup>
