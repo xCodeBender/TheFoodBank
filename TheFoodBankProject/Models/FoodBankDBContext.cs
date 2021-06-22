@@ -20,6 +20,7 @@ namespace TheFoodBankProject
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -76,9 +77,26 @@ namespace TheFoodBankProject
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
             });
 
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.ToTable("Order");
+
+                entity.Property(e => e.IngredientId).HasColumnName("ingredientId");
+
+                entity.Property(e => e.OrderId).HasColumnName("orderId");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.Property(e => e.UserId).HasColumnName("userId");
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(300)
+                    .HasColumnName("email");
 
                 entity.Property(e => e.LoginId)
                     .HasMaxLength(250)

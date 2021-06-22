@@ -16,22 +16,29 @@ export class MenuComponent {
 
   ngOnInit(): void {
     /*this.inventoryService.setBankId(2);*/
-    this.searchIngredientByBankId(2);
+    this.searchIngredientByBankId(this.bankId);
+    this.getMyInventory();
+    
   }
 
   inventories: Inventory[] = [];
   ingredients: Ingredient[] = [];
   ingredient: Ingredient;
+  bankId: number = 2;
 
  /* userCart: Ingredient[] = [];*/
 
   constructor(private inventoryService: InventoryService, public router: Router ) {}
 
   getMyInventory(): void {
-    this.inventoryService.getInventory().subscribe(inventories => this.inventories = inventories);
+    this.inventoryService.getInventory().subscribe(inventories => {
+      this.inventories = inventories;
+      console.log(this.inventories);
+    });
   }
 
   searchIngredientByBankId(bankId: number): any {
+    this.bankId = bankId;
     this.inventoryService.getIngredientByBank(bankId).subscribe((b) => {
       this.ingredients = b
       console.log(this.ingredients)
@@ -51,8 +58,12 @@ export class MenuComponent {
    /* let addItem: Ingredient[] = [];*/
 
     //this.userCart.push(addIngredient);
-    this.inventoryService.addToCart(addIngredient);
-    //console.log(this.userCart);
+    let count = this.getIngredientQuantity(addIngredient);
+    if (count > 0) {
+      this.inventoryService.addToCart(addIngredient);
+      this.lowerQuantity(addIngredient);
+    }
+
   }
 
   deleteFromCart(deleteIngredient: Ingredient) {
@@ -60,9 +71,24 @@ export class MenuComponent {
    // this.userCart.splice(deleteItem, 1);
    // console.log(this.userCart);
     this.inventoryService.deleteFromCart(deleteIngredient);
+    this.raiseQuantity(deleteIngredient);
   }
 
-  
+  getIngredientQuantity(ingredient: Ingredient): number  {
+    console.log(this.inventories);
+    console.log(ingredient);
+    console.log(this.bankId);
+    return this.inventories.find(i => i.BankId == this.bankId && i.IngredientsId == ingredient.id).quantity;
+  }
 
-  
+  lowerQuantity(ingredient: Ingredient): void {
+    console.log(this.inventories);
+    this.inventories.find(i => i.BankId == this.bankId && i.IngredientsId == ingredient.id).quantity -= 1;
+  }
+
+  raiseQuantity(ingredient: Ingredient): void {
+    this.inventories.find(i => i.BankId == this.bankId && i.IngredientsId == ingredient.id).quantity += 1;
+  }
+
+
 }

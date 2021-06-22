@@ -39,16 +39,54 @@ namespace TheFoodBankProject.Controllers
                 if (result == null)
                 {
                     return false;
-                } 
+                }
                 else
                 {
                     return true;
                 }
             }
 
-            
+
         }
 
+        [HttpGet("GetNextOrderId")]
+        public int GetNextOrderId()
+        {
+            using(FoodBankDBContext context = new FoodBankDBContext())
+            {
+                return (int)(context.Orders.OrderBy(o => o.OrderId ).Last().OrderId + 1); 
+                
+            }
+        }
+
+        [HttpPost("NewOrder")]
+        public Order NewOrder(int orderId, int userId, int ingredientId, int quantity)
+        {
+            using(FoodBankDBContext context = new FoodBankDBContext())
+            {
+                Order newOrder = new Order()
+                {
+                    OrderId = orderId,
+                    UserId = userId,
+                    IngredientId = ingredientId,
+                    Quantity = quantity
+
+                };
+                context.Orders.Add(newOrder);
+                context.SaveChanges();
+                return newOrder;
+            }
+        }
+        
+        [HttpGet("GetUser")]
+        public User GetUser(string loginId)
+        {
+            using (FoodBankDBContext context = new FoodBankDBContext())
+            {
+               return context.Users.ToList().Find(l => l.LoginId == loginId);
+               
+            }
+        }
 
         //gets ingredients using the bank id
         [HttpGet("GetIngredientsByBankId")]
@@ -276,7 +314,16 @@ namespace TheFoodBankProject.Controllers
                 return existingInventory;
             }
 
-            
+        }
+
+        [HttpGet("IngredientQuantity")]
+        public int IngredientQuantity(int ingredientId, int bankId)
+        {
+            using (FoodBankDBContext context = new FoodBankDBContext())
+            {
+
+                return (int)context.Inventories.ToList().Find(q => q.IngredientsId == ingredientId && q.BankId == bankId).Quantity; 
+            }
         }
     }
 }
