@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+html{
+    height:100%;
+}
+
+body {
+  height: 100%;
+  background-color: lightblue;
+}
+
 a {
   color: #0366d6;
 }
@@ -20,17 +29,43 @@ code {
   flex-wrap:wrap;
 }
 
-.item{
-    text-align:center;
-    margin: 5px;
-    display:flex;
-    flex-direction: column;
+.item {
+  text-align: center;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  border: 5px solid black;
 }
 .item-picture{
     height:100px;
     width:100px;
 }
 
-body{
-    background-color:lightblue;
+
+.welcome-format{
+    font-family:'Book Antiqua';
+
 }
+
+.container{
+  font-family: 'Book Antiqua';
+}
+
+.footer-font {
+  font-family: 'Book Antiqua';
+  bottom: 0px;
+  width:100%;
+  left: 0px;
+  right: 0px;
+  margin-top: 10px;
+}
+
+.main-layout{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+
+

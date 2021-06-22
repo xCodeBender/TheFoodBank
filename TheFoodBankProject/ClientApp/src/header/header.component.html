@@ -1,2 +1,4 @@
 
-<h3>Current User {{ getLogin() }}</h3>
+<div *ngIf="getLogin() != 'Default' "class="welcome-format">
+<h2>Current User: {{ getLogin() }}</h2>
+ </div>

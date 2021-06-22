@@ -42,8 +42,6 @@ export class CheckoutComponent {
     return result.length;
   }
 
- 
-
 
 
   subtractQuantity(): void {
@@ -60,8 +58,6 @@ export class CheckoutComponent {
     /*console.log(this.getNextOrderId());*/
     
     
-
-
   }
 
   getNextOrderId(ingredient: Ingredient[]): void {

@@ -11,7 +11,7 @@
  
   <img class="item-picture" src="https://spoonacular.com/cdn/ingredients_100x100/{{i.foodImages}}"/>
 
-  <!--<p>{{getIngredientQuantity(i)}}</p>-->
+  Quantity: {{getIngredientQuantity(i)}}
 
   <button (click)="addToCart(i)" >Add to Cart</button>
 
@@ -20,3 +20,5 @@
 </div>
  </div>
 <app-checkout></app-checkout>
+
+

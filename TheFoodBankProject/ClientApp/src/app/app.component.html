@@ -1,11 +1,16 @@
-<app-header></app-header>
-<body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
+<div class="main-layout">
+  <div>
+    <app-header></app-header>
+    <body>
+      <app-nav-menu></app-nav-menu>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </body>
   </div>
-</body>
-<!--<app-login></app-login>-->
-<!--<app-menu></app-menu>-->
-<!--<app-donate></app-donate>-->
 
+  <!--<app-login></app-login>-->
+  <!--<app-menu></app-menu>-->
+  <!--<app-donate></app-donate>-->
+  <app-footer></app-footer>
+</div>
