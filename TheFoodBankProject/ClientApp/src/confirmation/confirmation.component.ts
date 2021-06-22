@@ -21,12 +21,13 @@ export class ConfirmationComponent {
   }
 
   getCartDistinct(): any {
-   this.clear = this.inventoryService.getCart().filter((x, i, a) => a.indexOf(x) == i);
+    this.clear = this.inventoryService.getCart().filter((x, i, a) => a.indexOf(x) == i);
+    this.all = this.inventoryService.getCart();
   }
 
 
   getCount(i: Ingredient): number {
-    let result = this.clear.filter((item) => {
+    let result = this.all.filter((item) => {
       return item.id == i.id
     });
     console.log(result);
@@ -35,4 +36,6 @@ export class ConfirmationComponent {
   }
 
   clear: Ingredient[] = [];
+
+  all: Ingredient[] = [];
 }

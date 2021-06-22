@@ -19,6 +19,7 @@ export class InventoryService {
  "thefoodbank.database.windows.net" */
   userCart: Ingredient[] = [];
 
+
   testApi(): void {
     this.http.get("https://api.spoonacular.com/food/ingredients/search?query=baking mix&apiKey=ff94e67c9adc42c8a88c2308d88ce632&number=1").subscribe((response: any) => { console.log(response)});
   }
@@ -51,6 +52,12 @@ export class InventoryService {
   getLogin(): string {
     return this.loginName;
   }
+
+  getUser(): any {
+    return this.http.get(this.inventoryUrl + "api/FoodBank/GetUser" + "?loginId=" + this.loginName);
+  }
+
+
 
   createNewUser(newUsers: string): any {
     console.log(newUsers);
@@ -86,7 +93,10 @@ export class InventoryService {
   //return inventory
   getInventory(): any {
     return this.http.get(this.inventoryUrl + "api/FoodBank/GetInventory");
+
   }
+
+
   //add to inventory
   addNewInventory(newInventory: Inventory): any {
     console.log(newInventory);
@@ -127,4 +137,16 @@ export class InventoryService {
   //searchFoodName(foodName: string): any {
     //return this.http.get(this.inventoryUrl + "/ingredientName" + )
  // }
+
+  
+
+  getNextOrderId(): any {
+    return this.http.get(this.inventoryUrl + "api/FoodBank/GetNextOrderId");
+  }
+
+  newOrder(orderId: number, userId: number, ingredientId: number, quantity: number): any {
+    const params = new HttpParams();
+    return this.http.post(this.inventoryUrl + "api/FoodBank/NewOrder" + "?orderId=" + orderId + "&userId=" + userId +
+      "&ingredientId=" + ingredientId + "&quantity=" + quantity, params);
+  }
 }

@@ -42,22 +42,53 @@ export class CheckoutComponent {
     return result.length;
   }
 
+ 
+
+
 
   subtractQuantity(): void {
+    this.getNextOrderId(this.getCartDistinct());
     this.getCartDistinct().forEach((i: Ingredient) => {
       let count: number = this.getCount(i);
       this.inventoryService.reduceQuantity(this.inventoryService.bankId, i.id, count).subscribe(response => console.log(response));
-      console.log("count" + count);
-      console.log("bankId" + this.inventoryService.getBankId());
-      console.log("id" + i.id);
+      //console.log("count" + count);
+      //console.log("bankId" + this.inventoryService.getBankId());
+      //console.log("id" + i.id);
       
     })
-    this.router.navigate(['Confirmation']);
+    /*this.getNextOrderId(this.getCartDistinct());*/
+    /*console.log(this.getNextOrderId());*/
+    
+    
+
 
   }
 
+  getNextOrderId(ingredient: Ingredient[]): void {
+    let result: number = 0;
+    this.inventoryService.getNextOrderId().subscribe(response => {
+      result = response
+      /* making orders here */
 
+      ingredient.forEach((i: Ingredient) => {
+        let count = this.getCount(i);
+        console.log("count" + count);
+        this.inventoryService.getUser().subscribe(
+          userResponse => {
+            this.inventoryService.newOrder(result, userResponse.id, i.id, count).subscribe
+              ((newOrderResponse) => {
+                console.log(newOrderResponse);
+              })
+          }
+        );
+      })
+      this.router.navigate(['Confirmation']);
+      
+    });
+   
+  }
 
+  
 
 }
 

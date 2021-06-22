@@ -22,6 +22,8 @@ export class DonateComponent {
    /* this.getMyIngredients();*/
   }
 
+  
+
   public showMyMessage = false
 
   showMessageSoon() {

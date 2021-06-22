@@ -5,11 +5,16 @@
 </form>
 
 <div class="item-container" >
-<div class="item card" *ngFor="let i of ingredients">
-
+<div class="item card" *ngFor="let i of ingredients" >
+  
     {{i.foodName}}
+ 
   <img class="item-picture" src="https://spoonacular.com/cdn/ingredients_100x100/{{i.foodImages}}"/>
-  <button (click)="addToCart(i)">Add to Cart</button>
+
+  <!--<p>{{getIngredientQuantity(i)}}</p>-->
+
+  <button (click)="addToCart(i)" >Add to Cart</button>
+
   <button (click)="deleteFromCart(i)">Remove From Cart</button>
   
 </div>
