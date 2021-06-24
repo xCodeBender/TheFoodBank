@@ -30,6 +30,7 @@ export class DonateComponent {
     setTimeout(() => {
       this.showMyMessage = true
     }, 800)
+    
   }
 
   getMyIngredients(): void {
