@@ -60,12 +60,15 @@ code {
   margin-top: 10px;
 }
 
-.main-layout{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+/*  background-image: url("assets/foodbankpic.jpg");*/
 }
 
-
+.images{
+    width: 100%;
+}
 

@@ -1,10 +1,14 @@
 
-<form ngNativeValidate #checkIngredients="ngForm"(ngSubmit)="addIngredient(checkIngredients)">
-  <input name="searchTerm" placeholder="Search Food Name"  required ngModel/>
+<form ngNativeValidate #checkIngredients="ngForm" (ngSubmit)="addIngredient(checkIngredients)">
+  <input name="searchTerm" placeholder="Search Food Name" required ngModel />
   <input name="bankId" type="number" placeholder="Select Bank #" required ngModel />
-  <input name="quantity" type="number" placeholder="Quantity" required  />
+  <input name="quantity" type="number" placeholder="Quantity" required />
+
   <button (click)="showMessageSoon()">Submit</button>
-          <h1 *ngIf="showMyMessage">Thank you for your donation</h1>
+  <h1 *ngIf="showMyMessage">Thank you for your donation</h1>
+
+  <img class="images" *ngIf="showMyMessage" src="foodbankpic.jpg" />
+
 </form>
 
 
